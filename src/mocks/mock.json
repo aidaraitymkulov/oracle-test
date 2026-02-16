@@ -1,0 +1,29 @@
+[
+{
+"id": "7b2f-4a12",
+"name": "Иванов Иван Иванович",
+"account": "40817810500000001234",
+"currentLimit": 50000,
+"requestedLimit": 150000,
+"currency": "RUB",
+"status": "New"
+},
+{
+"id": "1c9d-8b34",
+"name": "Константинопольский Александр Владимирович",
+"account": "40817810500000005678",
+"currentLimit": 1500000,
+"requestedLimit": 2000000,
+"currency": "RUB",
+"status": "Approved"
+},
+{
+"id": "9a5e-2f11",
+"name": "Сидорова Анна Сергеевна",
+"account": "40817840300000009999",
+"currentLimit": 5000,
+"requestedLimit": 10000,
+"currency": "RUB",
+"status": "Rejected"
+}
+]

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { ApplicationTable } from './components/ApplicationTable';
+import { ApplicationModal } from './components/ApplicationModal';
 import { useApplications } from './hooks';
-import { Button, Modal } from './components/ui';
+import { Button } from './components/ui';
 import type { Application } from './types';
 
 const App = () => {
@@ -40,15 +41,10 @@ const App = () => {
           />
         </div>
 
-        <Modal
-          open={!!selectedApp}
-          onOpenChange={(open) => !open && handleModalClose()}
-          title={selectedApp?.name ?? ''}
-        >
-          <p className="text-sm text-gray-500">
-            Форма редактирования — следующий шаг
-          </p>
-        </Modal>
+        <ApplicationModal
+          application={selectedApp}
+          onClose={handleModalClose}
+        />
       </div>
     </div>
   );

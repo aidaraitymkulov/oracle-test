@@ -25,7 +25,7 @@ export const useApplicationStore = create<ApplicationStore>((set) => ({
   updateApplication: (id, data) =>
     set((state) => ({
       applications: state.applications.map((app) =>
-        app.id === id ? { ...app, ...data } : app
+        app.id === id ? { ...app, ...data } : app,
       ),
     })),
 

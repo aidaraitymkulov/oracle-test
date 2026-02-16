@@ -21,7 +21,7 @@ export const applicationFormSchema = z
     {
       message: 'Укажите причину для лимита свыше 1 000 000',
       path: ['reason'],
-    }
+    },
   );
 
 export type ApplicationFormData = z.infer<typeof applicationFormSchema>;

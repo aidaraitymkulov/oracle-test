@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Credit Limit Management — CRM-модуль
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Внутренний модуль для сотрудников банка: управление заявками на изменение кредитного лимита.
 
-Currently, two official plugins are available:
+## Запуск
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Скрипты
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `npm run dev` — dev-сервер
+- `npm run build` — сборка
+- `npm run lint` — проверка ESLint
+- `npm run lint:fix` — автоисправление
+- `npm run format` — форматирование Prettier
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Стек и обоснование выбора
+
+- **Zustand** — минимальный API, не требует провайдеров и boilerplate как Redux
+- **TanStack Table** — headless-таблица с типизацией, полный контроль над рендером
+- **React Hook Form + Zod** — производительные формы без лишних ре-рендеров, валидация на уровне схемы
+- **Radix UI** — доступные примитивы (Dialog, Select) без навязанных стилей
+- **Tailwind CSS** — утилитарный подход, быстрая стилизация без отдельных CSS-файлов
+- **use-debounce** — debounce поиска без ручной реализации
+
+## Структура
+
 ```
+src/
+├── components/
+│   ├── ApplicationTable/   # Таблица, фильтры, колонки
+│   ├── ApplicationModal/   # Модалка, форма, лог
+│   └── ui/                 # Button, Input, Select, Modal
+├── hooks/                  # useApplications, useActivityLog
+├── store/                  # Zustand store
+├── lib/                    # Mock API, валидация, утилиты
+├── types/                  # TypeScript интерфейсы
+└── data/                   # Моковые данные
+```
+
+## Реализованные фичи
+
+- [x] Таблица заявок с фильтром по статусу и поиском по ФИО (debounce 300ms)
+- [x] Модальная форма редактирования с условной валидацией (лимит > 1М — причина обязательна)
+- [x] Маскирование счёта: `40817 * * * * 1234`
+- [x] Сессионный лог активности
+- [x] Loading-скелетон и обработка ошибок с retry
+- [x] Mock API с имитацией задержки и 10% ошибок
+- [x] Строгий TypeScript — ноль `any`

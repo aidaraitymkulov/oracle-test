@@ -30,7 +30,7 @@ export const Select = ({
       )}
       <RadixSelect.Root value={value} onValueChange={onValueChange}>
         <RadixSelect.Trigger
-          className={`inline-flex items-center justify-between rounded-lg border px-3 py-2 text-sm outline-none transition-colors data-[placeholder]:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 ${
+          className={`inline-flex items-center justify-between rounded-lg border px-3 py-2 text-sm outline-none transition-colors data-placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 ${
             error ? 'border-red-500' : 'border-gray-300'
           }`}
         >
@@ -51,7 +51,7 @@ export const Select = ({
                 <RadixSelect.Item
                   key={option.value}
                   value={option.value}
-                  className="cursor-pointer rounded-md px-3 py-2 text-sm outline-none data-[highlighted]:bg-blue-50 data-[highlighted]:text-blue-700"
+                  className="cursor-pointer rounded-md px-3 py-2 text-sm outline-none data-highlighted:bg-blue-50 data-highlighted:text-blue-700"
                 >
                   <RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
                 </RadixSelect.Item>
